@@ -6,14 +6,13 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 13:17:54 by dnakano           #+#    #+#             */
-/*   Updated: 2020/10/30 19:05:11 by dnakano          ###   ########.fr       */
+/*   Updated: 2020/10/30 19:39:50 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ft_atof.h"
 
-static int		atodec_atoi(const char *str)
+static int			atodec_atoi(const char *str)
 {
 	int				sign;
 	unsigned long	abs;
@@ -72,7 +71,7 @@ static const char	*atodec_store(const char *s, t_float *iflt)
 	{
 		if (++digit <= 18)
 			iflt->frac_d.lsb = iflt->frac_d.lsb * 10 + *s - '0';
-		if (flag_expminus && iflt->exp_d)
+		if (flag_expminus && digit <= 18)
 			iflt->exp_d--;
 		s++;
 	}
@@ -83,7 +82,6 @@ void				ft_atof_atodec(const char *s, t_float *iflt)
 {
 	s = atodec_findhead(s, iflt);
 	s = atodec_store(s, iflt);
-	printf("iflt.exp_d      = %d\n", iflt->exp_d);
 	if (*s == 'e' || *s == 'E')
 		iflt->exp_d += atodec_atoi(++s);
 }

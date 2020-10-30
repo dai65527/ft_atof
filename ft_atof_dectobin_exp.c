@@ -6,14 +6,13 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 13:21:19 by dnakano           #+#    #+#             */
-/*   Updated: 2020/10/30 19:02:45 by dnakano          ###   ########.fr       */
+/*   Updated: 2020/10/30 19:41:20 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#  include <stdio.h>
 #include "ft_atof.h"
 
-static void dectobin_justifyleft(t_float *iflt)
+static void	dectobin_justifyleft(t_float *iflt)
 {
 	if (!iflt->frac_d.msb && !iflt->frac_d.lsb)
 		return ;
@@ -26,7 +25,7 @@ static void dectobin_justifyleft(t_float *iflt)
 	iflt->exp++;
 }
 
-static void dectobin_justifyright(t_float *iflt)
+static void	dectobin_justifyright(t_float *iflt)
 {
 	while (iflt->frac_d.msb >> 60)
 	{
@@ -69,28 +68,12 @@ void		ft_atof_dectobin_exp(t_float *iflt)
 	}
 	else
 	{
-		// printf("iflt.exp        = %d\n", iflt->exp);
-		printf("iflt.exp_d      = %d\n", iflt->exp_d);
-		// printf("iflt.frac_d.lsb = %llu\n", iflt->frac_d.lsb);
-		// printf("iflt.frac_d.msb = %llu\n", iflt->frac_d.msb);
-		// printf("iflt.frac       = %llu\n", iflt->frac);
 		dectobin_justifyleft(iflt);
 		iflt->exp += 123;
-		printf("iflt.exp        = %d\n", iflt->exp);
-		// printf("iflt.exp_d      = %d\n", iflt->exp_d);
-		// printf("iflt.frac_d.msb = %llu\n", iflt->frac_d.msb);
 		if (iflt->exp_d > 0)
 			dectobin_exppos(iflt);
 		else if (iflt->exp_d < 0)
 			dectobin_expneg(iflt);
-		printf("iflt.exp_d      = %d\n", iflt->exp_d);
-		printf("iflt.exp        = %d\n", iflt->exp);
-		// printf("iflt.exp        = %d\n", iflt->exp);
-		// printf("iflt.exp_d      = %d\n", iflt->exp_d);
-		// printf("iflt.frac_d.msb = %llu\n", iflt->frac_d.msb);
 		iflt->frac_d = uint128_leftshift(iflt->frac_d, 4);
-		// printf("iflt.exp        = %d\n", iflt->exp);
-		// printf("iflt.exp_d      = %d\n", iflt->exp_d);
-		// printf("iflt.frac_d.msb = %llu\n", iflt->frac_d.msb);
 	}
 }
