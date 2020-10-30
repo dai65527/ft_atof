@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 13:17:54 by dnakano           #+#    #+#             */
-/*   Updated: 2020/10/30 19:39:50 by dnakano          ###   ########.fr       */
+/*   Updated: 2020/10/30 21:53:26 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,9 @@ static const char	*atodec_store_int(const char *s, t_float *iflt, int *digit)
 static const char	*atodec_store(const char *s, t_float *iflt)
 {
 	int		digit;
-	int		flag_expminus;
 
 	digit = 0;
 	s = atodec_store_int(s, iflt, &digit);
-	flag_expminus = (digit <= 18);
 	if (*s != 'e' && *s != 'E' && *s != '.')
 		return (s);
 	if (*s == '.')
@@ -71,7 +69,7 @@ static const char	*atodec_store(const char *s, t_float *iflt)
 	{
 		if (++digit <= 18)
 			iflt->frac_d.lsb = iflt->frac_d.lsb * 10 + *s - '0';
-		if (flag_expminus && digit <= 18)
+		if (digit <= 18)
 			iflt->exp_d--;
 		s++;
 	}
