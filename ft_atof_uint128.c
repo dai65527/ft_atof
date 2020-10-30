@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 13:09:44 by dnakano           #+#    #+#             */
-/*   Updated: 2020/10/30 13:16:02 by dnakano          ###   ########.fr       */
+/*   Updated: 2020/10/30 17:15:57 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_uint128	uint128_sum(t_uint128 a, t_uint128 b)
 		tmp++;
 	if (tmp | (1ULL << 63))
 		res.msb++;
+	return (res);
 }
 
 t_uint128	uint128_tenx(t_uint128 n)
@@ -84,4 +85,5 @@ t_uint128	uint128_tendiv(t_uint128 n)
 	res_lsbmsb = tmp / 10;
 	res_lsblsb = ((tmp % 10) << 32) | (n.lsb & 0xFFFFFFFF) / 10;
 	res.lsb = (res_lsbmsb << 32) | res_lsblsb;
+	return (res);
 }

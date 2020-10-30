@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 14:06:50 by dnakano           #+#    #+#             */
-/*   Updated: 2020/10/30 16:19:31 by dnakano          ###   ########.fr       */
+/*   Updated: 2020/10/30 17:09:02 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_ATOF_H
 
 # include <stdint.h>
-# include "libft.h"
 
 # define FLT_FRACBIT	52
 # define FLT_EXPBIAS	1023
@@ -32,22 +31,26 @@ typedef union	u_float
 	uint64_t	mem;
 }				t_ufloat;
 
-
 typedef struct	s_float
 {
 	u_int8_t	sign;
-	u_int32_t	exp;
+	int32_t		exp;
 	u_int64_t	frac;
 	int			exp_d;
 	t_uint128	frac_d;
 }				t_float;
 
+# ifndef LIBFT_H
 double		ft_atof(const char *s);
+int			ft_isdigit(int c);
+int			ft_isspace(int c);
+# endif
 
 void		ft_atof_atobin(const char *s, t_float *iflt);
 void		ft_atof_atodec(const char *s, t_float *iflt);
 void		ft_atof_dectobin(t_float *iflt);
 void		ft_atof_dectobin_exp(t_float *iflt);
+void		ft_atof_dectobin_frac(t_float *iflt);
 double  	ft_atof_bintof(t_float iflt);
 
 void		uint128_bzero(t_uint128 *n);
